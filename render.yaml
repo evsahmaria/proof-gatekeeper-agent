@@ -1,0 +1,19 @@
+# Render.com blueprint. After deploy, set AGENT_GAMES_HMAC_SECRET in the
+# Render dashboard (Environment > Secret File / Environment Variables).
+# WARNING (Rules 1.4): free-tier services that sleep after inactivity will
+# cost you tasks. Use a paid / always-on instance during scored rounds,
+# or a host with persistent uptime. Attach a persistent disk for ./data
+# if your host restarts often, so the seen-set and idempotency cache survive.
+services:
+  - type: web
+    name: proof-gatekeeper-agent
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOW_UNVERIFIED
+        value: "false"

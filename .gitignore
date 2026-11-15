@@ -1,0 +1,12 @@
+# Secrets and local state. NEVER commit these.
+.env
+.env.*
+!.env.example
+data/
+circuits/*.wasm
+circuits/*.zkey
+circuits/inputs.json
+!circuits/inputs.example.json
+node_modules/
+*.log
+.DS_Store
